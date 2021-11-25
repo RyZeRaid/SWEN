@@ -1,4 +1,4 @@
-package project;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,6 +26,7 @@ public class LoginScreen  {
     private JFrame frame = new JFrame();
     private JLabel login = new JLabel("Login");
     private JButton enter;
+    private JButton create;
     private JTextField txtName;
     private JPasswordField txtPass;
     
@@ -40,14 +41,14 @@ public class LoginScreen  {
 
 		JPanel panel = new JPanel();
         JPanel panel1 = new JPanel();
-        JPanel panel2 = new JPanel();
+
 
         panel.setBackground(Color.YELLOW);
         panel1.setBackground(Color.YELLOW);
-        panel2.setBackground(Color.YELLOW);
+
 
         panel1.setLayout(new GridLayout(3,4));
-        panel2.setLayout(new GridLayout(3,0));
+
 
         panel.add(login);
         panel1.add(new JLabel("Username: "));
@@ -58,14 +59,13 @@ public class LoginScreen  {
         panel1.add(txtPass);
         enter = new JButton("Login");
         enter.addActionListener(new LoginActionListener());
+        create = new JButton("Create Account");
+        create.addActionListener(new CreateActionListener());
         panel1.add(enter);
-        panel2.add(new JLabel("This Login System is a Prototype and does not actually work"));
-        panel2.add(new JLabel("The Default Username is: Tester12"));
-        panel2.add(new JLabel("The Default Password is: Password12"));
+        panel1.add(create);
 
 		frame.add(panel, BorderLayout.NORTH);
         frame.add(panel1, BorderLayout.CENTER);
-        frame.add(panel2, BorderLayout.SOUTH);
 		frame.setSize(500,400);
         frame.pack();
 		frame.setLocationRelativeTo(null);
@@ -88,6 +88,14 @@ public class LoginScreen  {
                 JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "Wrong Information", JOptionPane.ERROR_MESSAGE);
             }   
 
+        }
+    }
+
+    private class CreateActionListener implements ActionListener{
+
+        public void actionPerformed(ActionEvent e){
+            frame.setVisible(false);
+            new CreateAccount();
         }
     }
 
