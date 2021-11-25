@@ -40,7 +40,13 @@ public class AddPromoter {
     private JButton done;
 
     private JTextField txtName;
-    private JTextField txtBudget;
+    private JTextField txtDoB;
+    private JTextField txtAge;
+    private JTextField txtGen;
+    private JTextField txtPosition;
+    private JTextField txtpnum;
+    private JTextField txtemail;
+    private JTextField txthome;
 
     /**
      * This constructor sets up the componets for the gui seen by the user
@@ -56,13 +62,31 @@ public class AddPromoter {
         panel1.setLayout(new GridLayout(2,2));
         panel2.setLayout(new GridLayout(1,0));
 
-        panel1.add(new JLabel("Promoter First Name: "));
+        panel1.add(new JLabel("Members Name: "));
         txtName = new JTextField(20);
         panel1.add(txtName);
-        panel1.add(new JLabel("Budget: "));
+        panel1.add(new JLabel("date of birth (dd/mm/yyyy): "));
         txtBudget = new JTextField(20);
-        panel1.add(txtBudget);
-        enter = new JButton("Add Promoter");
+        panel1.add(txtDoB);
+        panel1.add(new JLabel("Age: "));
+        txtBudget = new JTextField(20);
+        panel1.add(txtAge);
+        panel1.add(new JLabel("gender: "));
+        txtBudget = new JTextField(20);
+        panel1.add(txtGen);
+        panel1.add(new JLabel("Position: "));
+        txtBudget = new JTextField(20);
+        panel1.add(txtPosition);
+        panel1.add(new JLabel("Phone Number: "));
+        txtBudget = new JTextField(20);
+        panel1.add(txtpnum);
+        panel1.add(new JLabel("Email Address: "));
+        txtBudget = new JTextField(20);
+        panel1.add(txtemail);
+        panel1.add(new JLabel("Home Address: "));
+        txtBudget = new JTextField(20);
+        panel1.add(txthome);
+        enter = new JButton("Add Member");
         done = new JButton("Finished Adding");
         enter.addActionListener(new EnterActionListener());
         done.addActionListener(new DoneActionListener());
@@ -131,39 +155,57 @@ public class AddPromoter {
 
         public void actionPerformed(ActionEvent e){
             String user = txtName.getText();
-            String budget = txtBudget.getText();
+            String  Dob = txtDoB.getText();
+            String Age = txtAge.getText();
+            String gender = txtGen.getText();
+            String position = txtPosition.getText();
+            String phonenum = txtpnum.getText();
+            String email = txtemail.getText();
+            String homeadd = txthome.getText();  
 
             String[] name = user.split(" ");
+            int nomatch =  0 ;
 
-            if(name.length > 1){// ensuring that only the first name is entered
+            if(name.length > 2){// ensuring that only the first name is entered
                 JOptionPane.showMessageDialog(null, "Only first name required", "Please Enter Right Information", JOptionPane.ERROR_MESSAGE);
             }
 
-            else if(user.equals("") || budget.equals("")){
-                JOptionPane.showMessageDialog(null, "Please Enter Information", "No Information Entered", JOptionPane.ERROR_MESSAGE);
+            else if(user.equals("") || Dob.equals("") || Age.equals("") || gender.equals("") || position.equals("") || phonenum.equals("") || email.equals("") || homeadd.equals("")){
+                JOptionPane.showMessageDialog(null, "Please Enter Information for all feilds", "No Information Entered", JOptionPane.ERROR_MESSAGE);
+            }else if(gender != "Male" || gender != "Female"){
+                JOptionPane.showMessageDialog(null, "Please Enter the Genders of the members as 'Male' or 'Female' ", "Please Enter the RIght Information", JOptionPane.ERROR_MESSAGE);
+            }else if(Dob.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")){
+                        nomatch = 1;
+            } else if(nomatch != 1){
+                JOptionPane.showMessageDialog(null, "Please enter the Date of Birth in the correct format", "Please enter the right information", JOptionPane.ERROR_MESSAGE);
             }else{
 
                 try{ // ensures the data entered by the user is an actual number 
-                    double money = Double.parseDouble(budget);
-                    String message = "Press yes if " + user + " is the Promoters name and " + budget + " is the Budget";
+                    
+                    String message = "Press yes if " + user + " is the Memberss name \n";
+                            message += "Date of birth is: "+ Dob +"\n";
+                            message += "Age is:"+ Age + "gender is: "+ gender +"\n";
+                            message += "Position is:"+ position +"\n";
+                            message += "Phone number is:"+ phonenum +"\n";
+                            message += "Members email is:"+ email +"\n";
+                            message += "Members Home Address is:"+ homeadd +"\n";
 
-                    int confirm = JOptionPane.showConfirmDialog(null, message);
+                        int confirm = JOptionPane.showConfirmDialog(null, message);
 
-                    if (confirm == 0){
-                        String counter = id();
-                        BufferedWriter bwr = new BufferedWriter(new FileWriter("promoter.txt", true));
-                        String prom = counter + " " + user + " " + budget + " 0 0";
-                        bwr.write(prom + "\n");
-                        bwr.close();                                               
-                    }
+                        if (confirm == 0){
+                            String counter = id();
+                            BufferedWriter bwr = new BufferedWriter(new FileWriter("promoter.txt", true));
+                            String mem = counter + " " + user + " " + Age + " " + gender + " " + Dob + " " + position + " " + phonenum + " " + homeadd + " " + email;
+                            bwr.write(mem + "\n");
+                            bwr.close();                                               
+                        }
                 }catch(NumberFormatException exception){
-                    JOptionPane.showMessageDialog(null, "Budget needs to be a number", "The budget cannot contain any letters", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Age needs to be a number", "The Age cannot contain any letters", JOptionPane.ERROR_MESSAGE);
                 }catch(IOException ex){
                     //do nothing
                 }
 
             }
-
         }
     }
     //When the button connected to this action listener is pressed the user is brought back to the Promoter Screen
