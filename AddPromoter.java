@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
 
 public class AddPromoter {
 
-    private JLabel addprm= new JLabel("ADD PROMOTER");
+    private JLabel addprm= new JLabel("ADD MEMBER");
     private JFrame frame = new JFrame();
     private JPanel panel = new JPanel();
     private JPanel panel1 = new JPanel();
@@ -59,32 +59,32 @@ public class AddPromoter {
         panel.setBackground(Color.YELLOW);
         panel1.setBackground(Color.YELLOW);
 
-        panel1.setLayout(new GridLayout(2,2));
+        panel1.setLayout(new GridLayout(8,2));
         panel2.setLayout(new GridLayout(1,0));
 
         panel1.add(new JLabel("Members Name: "));
         txtName = new JTextField(20);
         panel1.add(txtName);
         panel1.add(new JLabel("date of birth (dd/mm/yyyy): "));
-        txtBudget = new JTextField(20);
+        txtDoB = new JTextField(20);
         panel1.add(txtDoB);
         panel1.add(new JLabel("Age: "));
-        txtBudget = new JTextField(20);
+        txtAge = new JTextField(20);
         panel1.add(txtAge);
         panel1.add(new JLabel("gender: "));
-        txtBudget = new JTextField(20);
+        txtGen = new JTextField(20);
         panel1.add(txtGen);
         panel1.add(new JLabel("Position: "));
-        txtBudget = new JTextField(20);
+        txtPosition = new JTextField(20);
         panel1.add(txtPosition);
         panel1.add(new JLabel("Phone Number: "));
-        txtBudget = new JTextField(20);
+        txtpnum = new JTextField(20);
         panel1.add(txtpnum);
         panel1.add(new JLabel("Email Address: "));
-        txtBudget = new JTextField(20);
+        txtemail = new JTextField(20);
         panel1.add(txtemail);
         panel1.add(new JLabel("Home Address: "));
-        txtBudget = new JTextField(20);
+        txthome = new JTextField(20);
         panel1.add(txthome);
         enter = new JButton("Add Member");
         done = new JButton("Finished Adding");
@@ -100,7 +100,8 @@ public class AddPromoter {
         frame.add(panel1, BorderLayout.CENTER);
         frame.add(panel2, BorderLayout.SOUTH);
         frame.setSize(500,400);
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setTitle("Add Promoter");
         frame.pack();
@@ -172,9 +173,16 @@ public class AddPromoter {
 
             else if(user.equals("") || Dob.equals("") || Age.equals("") || gender.equals("") || position.equals("") || phonenum.equals("") || email.equals("") || homeadd.equals("")){
                 JOptionPane.showMessageDialog(null, "Please Enter Information for all feilds", "No Information Entered", JOptionPane.ERROR_MESSAGE);
-            }else if(gender != "Male" || gender != "Female"){
-                JOptionPane.showMessageDialog(null, "Please Enter the Genders of the members as 'Male' or 'Female' ", "Please Enter the RIght Information", JOptionPane.ERROR_MESSAGE);
-            }else if(Dob.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")){
+            }else if( gender.equals("f") || gender.equals("F") || gender.equals("female") || gender.equals("Female") || gender.equals("FEMALE") )
+            {
+                gender = "Female";
+            }else if( gender.equals("m") ||gender.equals("M") ||gender.equals("male") || gender.equals("Male") ||gender.equals("MALE"))
+            {
+                gender = "Male";
+            }else if(gender.equals("Female") != true && gender.equals("Male") != true){
+                JOptionPane.showMessageDialog(null, "Please Enter the Genders of the members as 'Male' or 'Female' "+ gender, "Please Enter the Right Information", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(Dob.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")){
                         nomatch = 1;
             } else if(nomatch != 1){
                 JOptionPane.showMessageDialog(null, "Please enter the Date of Birth in the correct format", "Please enter the right information", JOptionPane.ERROR_MESSAGE);
