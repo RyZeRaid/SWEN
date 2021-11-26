@@ -69,11 +69,11 @@ public class Promoter {
 
        
         frame = new JFrame();
-        frame.setTitle("Current Promoters");
+        frame.setTitle("Current Members");
 
 
 
-        String[] columnNames = { "ID", "Name", "Budget", "#Plans", "#Events"};
+        String[] columnNames = { "ID", "Name", "Age", "Gender", "Position", "Phone Number", "Home Address", "Email Address"};
         model = new DefaultTableModel(columnNames,0);
 
 
@@ -130,7 +130,7 @@ public class Promoter {
         
         while((s = br.readLine()) != null){
             String[] pData = s.split(" ");
-            String[] item = {pData[0], pData[1], pData[2], pData[3], pData[4]};
+            String[] item = {pData[0], pData[1], pData[2], pData[3], pData[4], pData[5], pData[6], pData[7], pData[8], pData[9]};
             pList.add(item);
         }
         br.close();

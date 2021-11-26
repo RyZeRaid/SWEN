@@ -1,4 +1,4 @@
-
+package project;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -100,7 +100,7 @@ public class Trash {
         
         while((s = br.readLine()) != null){
             String[] pData = s.split(" ");
-            String[] item = {pData[0], pData[1], pData[2], pData[3], pData[4], "Choose"};
+            String[] item = {pData[0], pData[1], pData[2], pData[3], pData[4], pData[5], pData[6], pData[7], pData[8], pData[9], "Choose"};
             pList.add(item);
         }
         br.close();
@@ -133,7 +133,7 @@ public class Trash {
             
             for (int x = 0; x < getTableData(table).length; x++){
                 newList.clear();
-                if(getTableData(table)[x][5].equals("Delete") || getTableData(table)[x][5].equals("Restore")){
+                if(getTableData(table)[x][10].equals("Delete") || getTableData(table)[x][10].equals("Restore")){
                     String id = getTableData(table)[x][0].toString();
 
                     try{
@@ -162,11 +162,11 @@ public class Trash {
                         } 
                     
                 }
-                if(getTableData(table)[x][5].equals("Restore")){
+                if(getTableData(table)[x][10].equals("Restore")){
 
                     try{
                         BufferedWriter bw = new BufferedWriter(new FileWriter("Promoter.txt", true));
-                        String trashProm = getTableData(table)[x][0].toString() + " " +getTableData(table)[x][1].toString() + " " + getTableData(table)[x][2].toString() + " 0 0";
+                        String trashProm = getTableData(table)[x][0].toString() + " " +getTableData(table)[x][1].toString() + " " + getTableData(table)[x][2].toString() + " " + getTableData(table)[x][3].toString() + " " + getTableData(table)[x][4].toString() + " " + getTableData(table)[x][5].toString() + " " + getTableData(table)[x][6].toString() + " " + getTableData(table)[x][7].toString() + " " + getTableData(table)[x][8].toString() + " " + getTableData(table)[x][9].toString();
                         bw.write(trashProm + "\n");
                         bw.close();
                     }catch(IOException y){
@@ -190,7 +190,7 @@ public class Trash {
                         while((s = br.readLine()) != null){
                             String[] line = s.split(" ");
                             if (line[0].equals(id)){
-                                editProm = new EditPromoter(line[0], line[1], line[2]);
+                                editProm = new EditPromoter(line[0], line[1], line[2], , line[3], line[4], line[5], line[6], line[7], line[8], line[9]);
                             }else{
                                 newList.add(s);   
                             }

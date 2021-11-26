@@ -55,7 +55,7 @@ public class RemoveEdit {
 
 
 
-        String[] columnNames = { "ID", "Name", "Budget", "#Plans", "#Events", "Choose"};
+        String[] columnNames = { "ID", "Name", "Age", "Gender", "Position", "Phone Number", "Home Address", "Email Address", "Choose"};
         model = new DefaultTableModel(columnNames,0);
 
         String[] positions = {"Remove", "Update", "Choose"};
@@ -100,7 +100,7 @@ public class RemoveEdit {
         
         while((s = br.readLine()) != null){
             String[] pData = s.split(" ");
-            String[] item = {pData[0], pData[1], pData[2], pData[3], pData[4], "Choose"};
+            String[] item = {pData[0], pData[1], pData[2], pData[3], pData[4], pData[5], pData[6], pData[7], pData[8], pData[9],"Choose"};
             pList.add(item);
         }
         br.close();
@@ -133,7 +133,7 @@ public class RemoveEdit {
             
             for (int x = 0; x < getTableData(table).length; x++){
                 newList.clear();
-                if(getTableData(table)[x][5].equals("Remove")){
+                if(getTableData(table)[x][10].equals("Remove")){
                     String id = getTableData(table)[x][0].toString();
                     try{// adding the person that was removed to the trash bin file 
                         BufferedWriter bw = new BufferedWriter(new FileWriter("TrashBin.txt", true));
@@ -169,7 +169,7 @@ public class RemoveEdit {
                         } 
                     
                 }
-                else if(getTableData(table)[x][5].equals("Update")){
+                else if(getTableData(table)[x][10].equals("Update")){
 
                     String idNum = getTableData(table)[x][0].toString();
                     idNumbers.add(idNum);               
@@ -191,7 +191,7 @@ public class RemoveEdit {
                         while((s = br.readLine()) != null){
                             String[] line = s.split(" ");
                             if (line[0].equals(id)){
-                                editProm = new EditPromoter(line[0], line[1], line[2]);
+                                editProm = new EditPromoter(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8], line[9]);
                             }else{
                                 newList.add(s);   
                             }
