@@ -190,7 +190,7 @@ public class Trash {
                         while((s = br.readLine()) != null){
                             String[] line = s.split(" ");
                             if (line[0].equals(id)){
-                                editProm = new EditPromoter(line[0], line[1], line[2], , line[3], line[4], line[5], line[6], line[7], line[8], line[9]);
+                                editProm = new EditPromoter(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8], line[9]);
                             }else{
                                 newList.add(s);   
                             }

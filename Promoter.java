@@ -73,7 +73,7 @@ public class Promoter {
 
 
 
-        String[] columnNames = { "ID", "Name", "Age", "Gender", "Position", "Phone Number", "Home Address", "Email Address"};
+        String[] columnNames = { "ID", "Name", "Date of Birth", "Age", "Gender", "Position", "Phone Number", "Home Address", "Email Address"};
         model = new DefaultTableModel(columnNames,0);
 
 

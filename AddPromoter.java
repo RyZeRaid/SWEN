@@ -1,4 +1,6 @@
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -65,7 +67,7 @@ public class AddPromoter {
         panel1.add(new JLabel("Members Name: "));
         txtName = new JTextField(20);
         panel1.add(txtName);
-        panel1.add(new JLabel("date of birth (dd/mm/yyyy): "));
+        panel1.add(new JLabel("date of birth (MM/dd/yyyy): "));
         txtDoB = new JTextField(20);
         panel1.add(txtDoB);
         panel1.add(new JLabel("Age: "));
@@ -150,6 +152,41 @@ public class AddPromoter {
         return id+"";
     }
 
+    public static boolean validateDate(String strDate)
+   {
+	if (strDate.trim().equals(""))
+	{
+	    return true;
+	}
+	else
+	{
+	    SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+	    sdfrmt.setLenient(false);
+	    try
+	    {
+	        Date Date = sdfrmt.parse(strDate); 
+            
+	    }
+	    catch (ParseException e)
+	    {
+	        return false;
+	    }
+	    return true;
+	}
+   }
+
+   public static String gendercheck(String gender){
+
+    if( gender.equals("f") || gender.equals("F") || gender.equals("female") || gender.equals("Female") || gender.equals("FEMALE") )
+    {
+         return "Female";
+    }
+    else if( gender.equals("m") ||gender.equals("M") ||gender.equals("male") || gender.equals("Male") ||gender.equals("MALE"))
+    {
+       return"Male";
+    }
+    return gender;
+   }
 
     // When the button is pressed the user is information entered by the user will be taken and added to the file 
     private class EnterActionListener implements ActionListener{
@@ -167,29 +204,27 @@ public class AddPromoter {
             String[] name = user.split(" ");
             int nomatch =  0 ;
 
-            if(name.length > 2){// ensuring that only the first name is entered
-                JOptionPane.showMessageDialog(null, "Only first name required", "Please Enter Right Information", JOptionPane.ERROR_MESSAGE);
-            }
+            gender = gendercheck(gender);
 
-            else if(user.equals("") || Dob.equals("") || Age.equals("") || gender.equals("") || position.equals("") || phonenum.equals("") || email.equals("") || homeadd.equals("")){
+            System.out.println("worked");
+            if(name.length > 2){// ensuring that only the first name and last name is entered
+                JOptionPane.showMessageDialog(null, "Only first name and last name required", "Please Enter Right Information", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(user.equals("") || Dob.equals("") || Age.equals("") || gender.equals("") || position.equals("") || phonenum.equals("") || email.equals("") || homeadd.equals(""))
+            {
                 JOptionPane.showMessageDialog(null, "Please Enter Information for all feilds", "No Information Entered", JOptionPane.ERROR_MESSAGE);
-            }else if( gender.equals("f") || gender.equals("F") || gender.equals("female") || gender.equals("Female") || gender.equals("FEMALE") )
+            }
+            else if(gender.equals("Female") != true && gender.equals("Male") != true)
             {
-                gender = "Female";
-            }else if( gender.equals("m") ||gender.equals("M") ||gender.equals("male") || gender.equals("Male") ||gender.equals("MALE"))
-            {
-                gender = "Male";
-            }else if(gender.equals("Female") != true && gender.equals("Male") != true){
                 JOptionPane.showMessageDialog(null, "Please Enter the Genders of the members as 'Male' or 'Female' "+ gender, "Please Enter the Right Information", JOptionPane.ERROR_MESSAGE);
             }
-            else if(Dob.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")){
-                        nomatch = 1;
-            } else if(nomatch != 1){
+            else if(validateDate(Dob) == false){
                 JOptionPane.showMessageDialog(null, "Please enter the Date of Birth in the correct format", "Please enter the right information", JOptionPane.ERROR_MESSAGE);
             }else{
+                System.out.println("passed all the tests:" + gender + nomatch);
 
                 try{ // ensures the data entered by the user is an actual number 
-                    
+                    System.out.println("button pushed");
                     String message = "Press yes if " + user + " is the Memberss name \n";
                             message += "Date of birth is: "+ Dob +"\n";
                             message += "Age is:"+ Age + "gender is: "+ gender +"\n";
@@ -201,10 +236,12 @@ public class AddPromoter {
                         int confirm = JOptionPane.showConfirmDialog(null, message);
 
                         if (confirm == 0){
+                            System.out.println("confirmed");
                             String counter = id();
                             BufferedWriter bwr = new BufferedWriter(new FileWriter("promoter.txt", true));
                             String mem = counter + " " + user + " " + Age + " " + gender + " " + Dob + " " + position + " " + phonenum + " " + homeadd + " " + email;
                             bwr.write(mem + "\n");
+                            System.out.println("wrote to file");
                             bwr.close();                                               
                         }
                 }catch(NumberFormatException exception){
@@ -225,4 +262,6 @@ public class AddPromoter {
         }
     }
     
+
+
 }

@@ -51,13 +51,22 @@ public class EditPromoter {
      * @param name This is the name of the promoter that is going to be edited 
      * @param budget This is the budget of the promoter that is going to be edited 
      */
-    public EditPromoter(String id, String name, String budget){
+    public EditPromoter(String id, String name, String Dob, String Age,
+                        String gender, String position, String pnum, String email, String homeadd){
 
         this.name = name;
-        this.budget = budget;
+        this.Dob = budget;
         this.id = id;
+        this.Age = Age;
+        this.gender = gender;
+        this.position = position;
+        this.pnum = pnum;
+        this.email = email;
+        this.homeadd = homeadd;
 
-
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // compleet edit member !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!                    
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         panel.setLayout(new GridLayout(2,2));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
