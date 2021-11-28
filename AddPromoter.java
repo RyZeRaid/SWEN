@@ -50,6 +50,8 @@ public class AddPromoter {
     private JTextField txtemail;
     private JTextField txthome;
 
+    private AddPromoter prom;
+
     /**
      * This constructor sets up the componets for the gui seen by the user
      */
@@ -238,11 +240,15 @@ public class AddPromoter {
                         if (confirm == 0){
                             System.out.println("confirmed");
                             String counter = id();
+                            homeadd = homeadd.replace(" ","_");
                             BufferedWriter bwr = new BufferedWriter(new FileWriter("promoter.txt", true));
                             String mem = counter + " " + user + " " + Age + " " + gender + " " + Dob + " " + position + " " + phonenum + " " + homeadd + " " + email;
                             bwr.write(mem + "\n");
                             System.out.println("wrote to file");
-                            bwr.close();                                               
+                            bwr.close(); 
+                            
+                            
+                                                                          
                         }
                 }catch(NumberFormatException exception){
                     JOptionPane.showMessageDialog(null, "Age needs to be a number", "The Age cannot contain any letters", JOptionPane.ERROR_MESSAGE);
@@ -250,6 +256,7 @@ public class AddPromoter {
                     //do nothing
                 }
 
+            
             }
         }
     }
